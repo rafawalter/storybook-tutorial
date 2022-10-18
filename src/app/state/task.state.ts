@@ -7,6 +7,7 @@ import { Task } from '../models/task.model';
 export const actions = {
   ARCHIVE_TASK: 'ARCHIVE_TASK',
   PIN_TASK: 'PIN_TASK',
+  ERROR: 'APP_ERROR',
 };
 
 export class ArchiveTask {
@@ -17,6 +18,12 @@ export class ArchiveTask {
 
 export class PinTask {
   static readonly type = actions.PIN_TASK;
+
+  constructor(public payload: string) {}
+}
+
+export class AppError {
+  static readonly  type = actions.ERROR;
 
   constructor(public payload: string) {}
 }
@@ -102,5 +109,15 @@ export class TasksState {
         })
       );
     }
+  }
+  @Action(AppError)
+  setAppError(
+    { patchState, getState }: StateContext<TaskStateModel>,
+    { payload }: AppError,
+  ) {
+    const state = getState();
+    patchState({
+      error: !state.error,
+    })
   }
 }
