@@ -45,3 +45,6 @@ Thumbs.db
 /storybook-static/
 /documentation.json
 /build-storybook.log
+
+# Referências internas
+yarn.lock
